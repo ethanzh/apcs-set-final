@@ -1,13 +1,3 @@
-boolean allEqual(int a, int b, int c) {
-  // YOU WRITE THIS
-  return false;
-}
-
-boolean allDifferent(int a, int b, int c) {
-  // YOU WRITE THIS
-  return false;
-}
-
 boolean sameColor(Card a, Card b, Card c) {
   // YOU WRITE THIS
   return false;

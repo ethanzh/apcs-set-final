@@ -3,7 +3,6 @@
  */
 
 PImage cimg;
-// For extracting pieces of the image at http://clojure.paris/resources/public/imgs/all-cards.png
 public final int SHEET_LENGTH = 9;   // Number of cards in a row (or column) on the sheet
 public final int NUM_CARDS = 81;     // Number of cards in the sheet
 public final int CARD_WIDTH = 138;    // Width in pixels of a card
@@ -11,8 +10,14 @@ public final int CARD_HEIGHT = 97;   // Height in pixels of a card
 public final int CARD_X_SPACER = 1;       // Space between cards in the x-direction on the sheet
 public final int CARD_Y_SPACER = 1;       // Space between cards in the y-direction on the sheet
 // Offsets into the sheet of cards
-final int SHEET_LEFT_OFFSET = 7;
-final int SHEET_TOP_OFFSET = 7;
+final int LEFT_OFFSET = 6;
+final int TOP_OFFSET = 9;
+
+// Properties of cards expressed as symbols
+public enum CardColor { GREEN, PURPLE, RED };
+public enum CardCount { ONE, TWO, THREE };
+public enum CardFill { SOLID, STRIPED, OPEN };
+public enum CardShape { CAPSULE, SQUIGGLY, DIAMOND };
 
 // For locating cards on the play grid
 public final int GRID_LEFT_OFFSET = 16;   // Distance from left to start drawing grid
@@ -147,6 +152,32 @@ void draw() {
     }
   }
 }
+
+// For details on the 8-argument version of image(), see:
+// https://forum.processing.org/one/topic/image-ing-a-part-of-a-pimage.html
+void drawCard(int cardCol, int cardRow, int xpos, int ypos) {
+  image(cimg, xpos, ypos, CARD_WIDTH+CARD_X_SPACER, CARD_HEIGHT+CARD_Y_SPACER,
+              LEFT_OFFSET + cardCol*CARD_WIDTH, TOP_OFFSET + cardRow*CARD_HEIGHT, 
+              (cardCol+1)*CARD_WIDTH+CARD_X_SPACER, (cardRow+1)*CARD_HEIGHT+CARD_Y_SPACER);
+}
+
+void drawRow(int row) {
+  for (int col = 0; col < SHEET_LENGTH; col++)  {
+    drawCard(col, row, col*(CARD_WIDTH+CARD_X_SPACER), row*(CARD_HEIGHT+CARD_Y_SPACER));
+  }
+}
+
+void drawDeck() {
+  for (int row = 0; row < ROWS; row++) {
+    drawRow(row);
+  }
+}
+
+void drawCards() {
+  for (int row = 0; row < SHEET_LENGTH; row++) {
+    drawRow(row);
+  }
+}
       
 void drawButtons() {
   // Start, Stop, Clear rectangles in gray
@@ -169,7 +200,7 @@ void drawButtons() {
 }
 
 public void newGame() {
-  // YOU_WRITE_THIS
+  // YOU WRITE THIS
 }
 
 public void initFonts() {
@@ -189,9 +220,14 @@ public void drawDirections() {
 public void initSpriteSheet() {
   // NOTE: These cards are being used for educational purposes only and are not to be used
   // for profit without written consent by copyright holder(s).
-  String url = "https://amiealbrecht.files.wordpress.com/2016/08/set-cards.jpg?w=1250";
+  // Attribution for SET card sprite sheet:
+  // url = "https://amiealbrecht.files.wordpress.com/2016/08/set-cards.jpg?w=1250";
+  //
+  // Set up cards on local machine to minimize loading time
+  String cardSpriteSheet = "set-cards.jpg";
   // Need string that says "Loading..." here
-  cimg = loadImage(url, "png");  
+  cimg = loadImage(cardSpriteSheet, "png");  
+  // System.out.println(cimg);  //verify not null so we can be sure we have card sprites
 }
 
 void showScore() {
