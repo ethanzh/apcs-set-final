@@ -1,5 +1,5 @@
-/* NAME:   YOUR_NAME_HERE
- * PERIOD: YOUR_CLASS_PERIOD_HERE
+/* NAME:   Ethan Houston
+ * PERIOD: C
  */
 
 PImage cimg;
@@ -109,7 +109,7 @@ void setup() {
   
   fill(#000000);
   text("Loading...", 50, 150);
-  
+   
   newGame();
 
   initFonts();  
@@ -125,7 +125,7 @@ void draw() {
   showMessage();
   drawButtons();
   drawDirections();
-  
+    
   grid.display();
   grid.highlightSelectedCards();
   
@@ -200,7 +200,34 @@ void drawButtons() {
 }
 
 public void newGame() {
-  // YOU WRITE THIS
+  
+  deck = new Deck();
+  grid = new Grid();
+  
+  score = 0;
+  
+  currentCols = 4;
+  
+  state = State.PLAYING;
+  
+  message = 0;
+  
+  
+  for (int i = 0; i < currentCols; i++){
+    
+      for (int j = 0; j < ROWS; j++){
+   
+        Card currentCard = new Card(i, j);
+        
+        grid.addCardToBoard(currentCard);
+    
+      }
+  }
+  
+  
+  timeElapsed = 0;
+  
+  runningTimerStart = millis();
 }
 
 public void initFonts() {

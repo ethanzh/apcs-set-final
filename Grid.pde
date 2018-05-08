@@ -129,7 +129,18 @@ public class Grid {
   // Postconditions: board has been updated to include the card
   //                the number of cardsInPlay has been increased by one
   public void addCardToBoard(Card card) {
-    // YOU WRITE THIS
+    
+    int col = cardsInPlay / ROWS;
+    
+    int row = (cardsInPlay % 3) - 1;
+
+    if (row == -1){
+      row = 2;
+    }
+
+    board[col][row] = card;
+    
+    cardsInPlay++;
   }
     
   public void addColumn() {
