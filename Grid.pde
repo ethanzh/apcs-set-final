@@ -130,6 +130,8 @@ public class Grid {
   //                the number of cardsInPlay has been increased by one
   public void addCardToBoard(Card card) {
     
+    // Need to randomize this
+    
     int col = cardsInPlay / ROWS;
     
     int row = (cardsInPlay % 3) - 1;

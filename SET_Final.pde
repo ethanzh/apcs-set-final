@@ -212,18 +212,21 @@ public void newGame() {
   
   message = 0;
   
-  
-  for (int i = 0; i < currentCols; i++){
+  // These values of 4 and 3 are hard-coded for now
+  for (int i = 0; i < 4; i++){
     
-      for (int j = 0; j < ROWS; j++){
+      for (int j = 0; j < 3; j++){
+                  
+          // It's important that col and row have different random values
+          int col = (int) (Math.random() * SHEET_LENGTH);
+          int row = (int) (Math.random() * SHEET_LENGTH);
    
-        Card currentCard = new Card(i, j);
+          Card currentCard = new Card(col, row);
         
-        grid.addCardToBoard(currentCard);
-    
+          grid.addCardToBoard(currentCard);
+
       }
   }
-  
   
   timeElapsed = 0;
   
