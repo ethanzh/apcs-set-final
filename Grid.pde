@@ -159,8 +159,8 @@ public class Grid {
       
       score += 5;
       message = 3;
-      
-      
+     
+     addCardToBoard(deck.deal());
       
     }
     
