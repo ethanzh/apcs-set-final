@@ -144,7 +144,26 @@ public class Grid {
   }
     
   public void addColumn() {
-    // YOU WRITE THIS
+    
+    if(cardsInPlay == 0){
+     
+      message = 5;
+      
+      return;
+      
+    }
+    
+    if(findSet().size()  == 0){
+      
+      score += 5;
+      message = 3;
+      
+      
+      
+    }
+    
+    
+    
   }
 
   
