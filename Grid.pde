@@ -129,20 +129,11 @@ public class Grid {
   // Postconditions: board has been updated to include the card
   //                the number of cardsInPlay has been increased by one
   public void addCardToBoard(Card card) {
-    
-    // Need to randomize this
-    
-    int col = cardsInPlay / ROWS;
-    
-    int row = (cardsInPlay % 3) - 1;
 
-    if (row == -1){
-      row = 2;
-    }
-
-    board[col][row] = card;
+    board[col(cardsInPlay)][row(cardsInPlay)] = card;
     
     cardsInPlay++;
+    
   }
     
   public void addColumn() {
@@ -155,17 +146,23 @@ public class Grid {
       
     }
     
-    if(findSet().size()  == 0){
-      
+    if(findSet().size() == 0){
+     
       score += 5;
       message = 3;
-     
-     addCardToBoard(deck.deal());
+      cardsInPlay += 3;
+      
+      for(int i = 0; i < 3; i++){
+       
+        addCardToBoard(deck.deal());
+        
+      }
+    } else  {
+      
+      score -= 5;  
+      message = 4;
       
     }
-    
-    
-    
   }
 
   
