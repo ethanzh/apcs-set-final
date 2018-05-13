@@ -51,7 +51,23 @@ public class Grid {
                               // how to compare two different locations.  Also look up the
                               // documentation on ArrayList to see how sort(null) works
 
-    // YOU WRITE THIS
+    
+    
+    System.out.println(selectedLocs);
+    
+    if(cardsInPlay == 0 || cardsInPlay > 12){
+    }
+    else if(cardsInPlay == 12){
+      
+      for(Location loc : selectedLocs){
+        
+        int row = loc.getRow();
+        int col = loc.getCol();
+        
+        System.out.println(board[row][col]);
+        
+      } 
+    }
   }
   
   // Precondition: Three cards have been selected by the player
