@@ -52,18 +52,34 @@ public class Grid {
                               // documentation on ArrayList to see how sort(null) works
 
     
-    
-    System.out.println(selectedLocs);
-    
     if(deck.size() == 0){
       
       System.out.println("Deck is empty");
+      
+     for(int i = 0; i < 3; i++){
+        
+        Location current = selectedLocs.get(i);
+        
+        int currentRow = current.getRow();
+        int currentCol = current.getCol();
+        
+        board[currentCol][currentRow] = board[currentCols - 1][i];
+        
+      }
+      
+      currentCols -= 1;
+     
+     
+     cardsInPlay -= 3;
+     currentCols -= 1;
       
     }
     
     else if(cardsInPlay > 12){
      
       cardsInPlay -= 3;
+      
+      System.out.println("Deck size: " + deck.size());
       
       for(int i = 0; i < 3; i++){
         
@@ -82,7 +98,7 @@ public class Grid {
     
     else if(cardsInPlay == 12){
       
-      System.out.println(currentCols);
+      System.out.println("Deck size: " + deck.size());
       
       for(Location loc : selectedLocs){
         
@@ -102,7 +118,13 @@ public class Grid {
       score += 10;
       removeSet();
       if (isGameOver()) {
-        // YOU WRITE THIS
+       
+        state = State.GAME_OVER;
+        int runningTimerEnd = (int) millis() / 1000;
+        score += timerScore();
+        message = 7;
+        
+        
       } else {
         state = State.PLAYING;
         message = 1;
@@ -212,8 +234,15 @@ public class Grid {
   // GAME PROCEDURES
   
   public boolean isGameOver() {
-    // YOU WRITE THIS
-    return false;
+    
+    if(findSet().size() == 0 && deck.size() == 0){
+      System.out.println("Over");
+      return true;
+    } else {
+      System.out.println("Not over");
+      return false; 
+    }
+      
   }
 
   public boolean tripleSelected() {
