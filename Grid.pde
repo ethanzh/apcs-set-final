@@ -55,16 +55,41 @@ public class Grid {
     
     System.out.println(selectedLocs);
     
-    if(cardsInPlay == 0 || cardsInPlay > 12){
+    if(deck.size() == 0){
+      
+      System.out.println("Deck is empty");
+      
     }
+    
+    else if(cardsInPlay > 12){
+     
+      cardsInPlay -= 3;
+      
+      for(int i = 0; i < 3; i++){
+        
+        Location current = selectedLocs.get(i);
+        
+        int currentRow = current.getRow();
+        int currentCol = current.getCol();
+        
+        board[currentCol][currentRow] = board[currentCols - 1][i];
+        
+      }
+      
+      currentCols -= 1;
+      
+    }
+    
     else if(cardsInPlay == 12){
+      
+      System.out.println(currentCols);
       
       for(Location loc : selectedLocs){
         
         int row = loc.getRow();
         int col = loc.getCol();
         
-        System.out.println(board[row][col]);
+        board[col][row] = deck.deal();
         
       } 
     }
@@ -166,13 +191,15 @@ public class Grid {
      
       score += 5;
       message = 3;
-      cardsInPlay += 3;
+      currentCols += 1;
+
       
       for(int i = 0; i < 3; i++){
        
         addCardToBoard(deck.deal());
         
       }
+      
     } else  {
       
       score -= 5;  
