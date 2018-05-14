@@ -44,6 +44,6 @@ public int timerScore() {
   
   int seconds = timeElapsed / 1000;
   
-  return max(seconds - 300, 0);
+  return max(300 - seconds, 0);
 
 }
